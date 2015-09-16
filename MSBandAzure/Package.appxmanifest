@@ -24,5 +24,7 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
+    <DeviceCapability Name="proximity" />
+    <DeviceCapability Name="bluetooth" />
   </Capabilities>
 </Package>

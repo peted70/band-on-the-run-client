@@ -21,7 +21,7 @@ namespace MSBandAzure.ViewModels
             }
         }
 
-        public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override async void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             if (state.Any())
             {
@@ -38,7 +38,7 @@ namespace MSBandAzure.ViewModels
 
             if (App.CurrentBand != null)
             {
-                App.CurrentBand.
+                await App.CurrentBand.Connect(null);
             }
         }
 

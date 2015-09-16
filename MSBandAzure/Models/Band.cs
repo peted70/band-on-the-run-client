@@ -1,5 +1,7 @@
 ﻿using Microsoft.Band;
+using MSBandAzure.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -31,7 +33,14 @@ namespace MSBandAzure.Model
                         .First(field => field.Name == "currentAppId")
                         .SetValue(_bandClient, Guid.NewGuid());
 
+            SensorData = new List<DataViewModelBase>
+                    {
+                        new HeartRateViewModel(_bandClient),
+                    };
+
             Connected = true;
         }
+
+        public List<DataViewModelBase> SensorData { get; set; }
     }
 }

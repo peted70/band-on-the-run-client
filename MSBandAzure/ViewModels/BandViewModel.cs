@@ -28,6 +28,7 @@ namespace MSBandAzure.ViewModels
             try
             {
                 await _band.Connect();
+
             }
             finally
             {
