@@ -11,12 +11,16 @@ namespace MSBandAzure.ViewModels
 {
     public class DetailPageViewModel : MSBandAzure.Mvvm.ViewModelBase
     {
+        public BandViewModel BandViewModel { get; set; }
+
         public DetailPageViewModel()
         {
+            BandViewModel = App.CurrentBand;
+
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
                 // designtime data
-                this.Value = "Designtime value";
+                //this.Value = "Designtime value";
                 return;
             }
         }
@@ -26,19 +30,23 @@ namespace MSBandAzure.ViewModels
             if (state.Any())
             {
                 // use cache value(s)
-                if (state.ContainsKey(nameof(Value))) Value = state[nameof(Value)]?.ToString();
+                //if (state.ContainsKey(nameof(Value))) Value = state[nameof(Value)]?.ToString();
                 // clear any cache
                 state.Clear();
             }
             else
             {
                 // use navigation parameter
-                Value = parameter?.ToString();
+                //Value = parameter?.ToString();
             }
 
             if (App.CurrentBand != null)
             {
-                await App.CurrentBand.Connect(null);
+                if (App.CurrentBand.Connected == false)
+                {
+                    await App.CurrentBand.Connect(null);
+                    await App.CurrentBand.StartSensors();
+                }
             }
         }
 
@@ -46,8 +54,8 @@ namespace MSBandAzure.ViewModels
         {
             if (suspending)
             {
-                // persist into cache
-                state[nameof(Value)] = Value;
+                //// persist into cache
+                //state[nameof(Value)] = Value;
             }
             return base.OnNavigatedFromAsync(state, suspending);
         }
@@ -56,8 +64,5 @@ namespace MSBandAzure.ViewModels
         {
             args.Cancel = false;
         }
-
-        private string _Value = "Default";
-        public string Value { get { return _Value; } set { Set(ref _Value, value); } }
     }
 }

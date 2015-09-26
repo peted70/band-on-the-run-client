@@ -44,6 +44,89 @@
                 <Setter Property="HeaderForeground" Value="#FF2B2B2B" />
             </Style>
 
+            <DataTemplate x:Key="stt">
+                <Border BorderThickness="1"
+			BorderBrush="White">
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="115*" />
+                            <ColumnDefinition Width="151*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Name}"
+					Style="{StaticResource SubheaderTextBlockStyle}"
+					TextAlignment="Center"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center" />
+                        <StackPanel HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Margin="9,21,11.833,21"
+					Height="73"
+					Width="130"
+					Grid.Column="1">
+                            <TextBlock FontSize="44"
+						Text="{Binding SkinTemp}"
+						Style="{StaticResource HeaderTextBlockStyle}"
+						VerticalAlignment="Center"
+						TextAlignment="Center" />
+                            <TextBlock FontSize="18"
+						Text="{Binding TimeStamp}"
+						VerticalAlignment="Center"
+						TextAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="uvt">
+                <Border BorderThickness="1"
+                BorderBrush="White">
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="115*" />
+                            <ColumnDefinition Width="151*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Name}"
+                           Style="{StaticResource SubheaderTextBlockStyle}"
+                           TextAlignment="Center"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+                        <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="9,21,11.833,21"
+                            Height="73"
+                            Width="130"
+                            Grid.Column="1">
+                            <TextBlock FontSize="44"
+                               Text="{Binding UVIndex}"
+                               Style="{StaticResource HeaderTextBlockStyle}"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center" />
+                            <TextBlock FontSize="18"
+                               Text="{Binding TimeStamp}"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="hrt">
+                <Border x:Name="border" BorderThickness="1" 
+			BorderBrush="White">
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="115*"/>
+                            <ColumnDefinition Width="151*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Name}" Style="{StaticResource SubheaderTextBlockStyle}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Height="120" Width="280" Grid.Column="1">
+                            <TextBlock FontSize="44"
+						Text="{Binding HeartRate}" Style="{StaticResource HeaderTextBlockStyle}" VerticalAlignment="Center" TextAlignment="Center"/>
+                            <TextBlock FontSize="18"
+						Text="{Binding TimeStamp}" VerticalAlignment="Center" TextAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
         </ResourceDictionary>
 
         <!--  RequestedTheme=Light  -->

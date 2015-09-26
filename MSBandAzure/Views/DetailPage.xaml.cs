@@ -10,9 +10,10 @@ namespace MSBandAzure.Views
         {
             InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Disabled;
+            DataContext = App.Locator.DetailPageViewModel;
         }
 
-        // strongly-typed view models enable x:bind
-        public DetailPageViewModel ViewModel => DataContext as DetailPageViewModel;
+    // strongly-typed view models enable x:bind
+    public DetailPageViewModel ViewModel => DataContext as DetailPageViewModel;
     }
 }

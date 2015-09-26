@@ -1,21 +1,25 @@
 ﻿using Microsoft.Band;
-using MSBandAzure.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
+using MSBandAzure.Services;
+using MSBandAzure.ViewModels;
+using Autofac;
 
 namespace MSBandAzure.Model
 {
     public class Band
     {
-        private IBandInfo _info;
+        private readonly IBandInfo _info;
         private IBandClient _bandClient;
+        private readonly IBandService _bandService;
+        private readonly IComponentContext _container;
 
-        public Band(IBandInfo info)
+        public IBandClient Client {  get { return _bandClient; } }
+
+        public Band(IBandInfo info, IBandService bandService, IComponentContext container)
         {
+            _container = container;
             _info = info;
+            _bandService = bandService;
         }
         public string Name { get { return _info.Name; } }
 
@@ -23,24 +27,13 @@ namespace MSBandAzure.Model
 
         public async Task Connect()
         {
-            _bandClient = await BandClientManager.Instance.ConnectAsync(_info);
-
-            // Note. The following code is a workaround for a bug in the Band SDK;
-            // see the following link 
-            // http://stackoverflow.com/questions/30611731/microsoft-band-sdk-sensors-windows-sample-exception
-            Type.GetType("Microsoft.Band.BandClient, Microsoft.Band")
-                        .GetRuntimeFields()
-                        .First(field => field.Name == "currentAppId")
-                        .SetValue(_bandClient, Guid.NewGuid());
-
-            SensorData = new List<DataViewModelBase>
-                    {
-                        new HeartRateViewModel(_bandClient),
-                    };
-
+            _bandClient = await _bandService.ConnectBandAsync(_info);
             Connected = true;
         }
 
-        public List<DataViewModelBase> SensorData { get; set; }
+        internal DataViewModelBase CreateSensorViewModel<T>() where T : DataViewModelBase
+        {
+            return _container.Resolve<T>(new TypedParameter(typeof(IBandClient), _bandClient));
+        }
     }
 }

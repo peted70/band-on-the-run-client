@@ -3,6 +3,7 @@
     "Autofac": "3.5.2",
     "Microsoft.Band": "1.3.10702",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
+    "Rx-Main": "2.3.0-beta2",
     "Template10": "1.0.0"
   },
   "frameworks": {

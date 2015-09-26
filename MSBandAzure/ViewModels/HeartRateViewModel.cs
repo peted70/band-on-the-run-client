@@ -1,5 +1,6 @@
 ﻿using Microsoft.Band;
 using Microsoft.Band.Sensors;
+using MSBandAzure.Model;
 using MSBandAzure.Mvvm;
 using System;
 using System.Threading.Tasks;
@@ -33,6 +34,8 @@ namespace MSBandAzure.ViewModels
 
         protected override async Task<object> Start(object arg)
         {
+            var band = arg as Band;
+            _bandClient = band.Client;
             var consent = _bandClient.SensorManager.HeartRate.GetCurrentUserConsent();
             switch (consent)
             {
